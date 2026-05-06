@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>M-Pesa Payment</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="payment-box">
+  <h2>Checkout</h2>
+
+  <ul id="summary"></ul>
+  <h3>Total: KES <span id="total"></span></h3>
+
+  <input type="text" id="phone" placeholder="07XXXXXXXX">
+  <button onclick="pay()">Pay Now</button>
+
+  <p id="message"></p>
+</div>
+
+
+
+
+<script>
+function pay() {
+  let phone = document.getElementById("phone").value;
+
+  if(phone.length < 10) {
+    document.getElementById("message").innerText = "Enter valid number";
+    return;
+  }
+
+  document.getElementById("message").innerText =
+    "Payment request sent to " + phone + ". Check your phone and enter M-Pesa PIN.";
+
+  // simulate success after 5 seconds
+  setTimeout(() => {
+    document.getElementById("message").innerText = "Payment Successful!";
+  }, 5000);
+}
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let summary = document.getElementById("summary");
+let total = 0;
+
+cart.forEach(item => {
+  let li = document.createElement("li");
+  li.innerText = `${item.name} x${item.quantity}`;
+  summary.appendChild(li);
+
+  total += item.price * item.quantity;
+});
+
+document.getElementById("total").innerText = total;
+
+function pay() {
+  document.getElementById("message").innerText =
+    "Payment request sent. Check your phone.";
+}
+</script>
+
+</body>
+</html>
