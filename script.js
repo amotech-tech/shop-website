@@ -33,7 +33,6 @@ function displayCart() {
 
   document.getElementById("total").innerText = total;
 }
-
 displayCart();
 li.innerHTML = `
   ${item.name} x${item.quantity} - KES ${item.price * item.quantity}
